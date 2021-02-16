@@ -18,6 +18,7 @@
  * 
 */
 const navbarList = document.getElementById("navbar__list");
+
 const section1 = document.getElementById("section1");
 const section1Title = section1.getElementsByTagName('h2')[0];
 
@@ -33,11 +34,13 @@ const section3Title = section3.getElementsByTagName('h2')[0];
  * Start Helper Functions
  * 
 */
-function createAndAddNavbarElement(sectionTitle){       // Creates an element and adds it to the navbar, by taking sectionTitle as an attribute
-    const element = document.createElement("li");
+function createAndAddNavbarElement(sectionTitle){       // Creates an element and adds it to the navbar, by taking sectionTitle as a parameter
+    element = document.createElement("li");
     const elementContent = document.createTextNode(sectionTitle.innerText);
+    element.classList.add("menu__link");
     element.appendChild(elementContent);
     navbarList.appendChild(element);
+    return element;
 }
 
 
@@ -49,18 +52,28 @@ function createAndAddNavbarElement(sectionTitle){       // Creates an element an
 
 // build the nav
 
-createAndAddNavbarElement(section1Title);
-createAndAddNavbarElement(section2Title);
-createAndAddNavbarElement(section3Title);
-navbarList.style.color = "black";
-navbarList.style.float = "left";
+const element1 = createAndAddNavbarElement(section1Title);
+const element2 = createAndAddNavbarElement(section2Title);
+const element3 = createAndAddNavbarElement(section3Title);
+navbarList.style.cssText = "color: black; display: flex; justify-content: space-around; height: 40px;padding: 10px 0";
+const navbarElementsList = navbarList.querySelectorAll("li");
+for(i = 0; i < navbarElementsList.length; i++){
+    navbarElementsList[i].style.cssText= "padding: 10px 0";     // Adds padding to every element inside navbarList
+}
 
 // Add class 'active' to section when near top of viewport
 
 
 // Scroll to anchor ID using scrollTO event
-
-
+element1.addEventListener('click', function(){
+    section1.scrollIntoView({behavior: "smooth"});
+})
+element2.addEventListener('click', function(){
+    section2.scrollIntoView({behavior: "smooth"});
+})
+element3.addEventListener('click', function(){
+    section3.scrollIntoView({behavior: "smooth"});
+})
 /**
  * End Main Functions
  * Begin Events
