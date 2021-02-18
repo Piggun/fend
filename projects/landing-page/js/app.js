@@ -67,9 +67,9 @@ function scrollToSection(){
     for(let i = 0; i < navbarElementsList.length; i++){
         navbarElementsList[i].addEventListener('click', function(){
             sections[i].scrollIntoView({behavior: "smooth"});
-        })
-    }
-}
+        });
+    };
+};
 scrollToSection();
 
 /**
