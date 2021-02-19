@@ -56,13 +56,24 @@ createNavbar();
 navbarList.style.cssText = "color: black; display: flex; justify-content: space-around; height: 40px; padding: 10px 0";
 const navbarElementsList = navbarList.querySelectorAll("li");
 for(i = 0; i < navbarElementsList.length; i++){
-    navbarElementsList[i].style.cssText= "padding: 10px 0";     // Adds padding to every element inside navbarList
+    navbarElementsList[i].style.cssText= "padding: 10px 5px";     // Adds padding to every element inside navbarList
 }
 
 // Add class 'active' to section when near top of viewport
 
+function setNavbarElActive(){
+    sections.forEach((element, index) =>{
+        let box = element.getBoundingClientRect();
+        if(box.top <= 150 && box.bottom >= 150){
+            console.log("in viewport: " + element.id);
+            navbarElementsList[index].classList.add("active");
+        }
+        else{
+            navbarElementsList[index].classList.remove("active");
+        }})
+};
 
-// Scroll to anchor ID using scrollTO event
+// Scroll to section using scrollIntoView event
 function scrollToSection(){
     for(let i = 0; i < navbarElementsList.length; i++){
         navbarElementsList[i].addEventListener('click', function(){
@@ -96,3 +107,6 @@ function setAsActive(){
 setAsActive();
 
 
+document.addEventListener('scroll', function(){
+    setNavbarElActive();
+});
