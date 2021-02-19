@@ -17,6 +17,7 @@
  * Define Global Variables
  * 
 */
+const pageHeader = document.querySelector(".page__header");
 const navbarList = document.getElementById("navbar__list");
 const sections = document.querySelectorAll("section");
 
@@ -110,3 +111,16 @@ setAsActive();
 document.addEventListener('scroll', function(){
     setNavbarElActive();
 });
+
+// Hide navbar when scrolling down
+let prevScrollPosition = window.pageYOffset;
+window.addEventListener('scroll',function(){
+    let currentScrollPosition = window.pageYOffset;
+    if(prevScrollPosition > currentScrollPosition){
+        pageHeader.style.top = "0";
+    }
+    else{
+        pageHeader.style.top = "-60px";
+    }
+    prevScrollPosition = currentScrollPosition;
+})
