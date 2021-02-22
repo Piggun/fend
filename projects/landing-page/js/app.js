@@ -24,6 +24,7 @@ const sections = document.querySelectorAll("section");
 const section1 = document.getElementById("section1");
 const section2 = document.getElementById("section2");
 const section3 = document.getElementById("section3");
+const pageFold = window.pageYOffset + 800;
 
 
 /**
@@ -49,7 +50,7 @@ function createNavbar(){
         element.classList.add("menu__link");
         navbarList.appendChild(element)
     };
-};
+}
 
 
 // add class 'your-active-class' to section when element on navbar is clicked
@@ -60,7 +61,7 @@ function setAsActive(){
                element.classList.remove("your-active-class");});        // remove class 'your-active-class' from every section
             element.classList.add("your-active-class");})       // add class 'your-active-class' to corresponding section
         });
-};
+}
 
 
 // Add class 'active' to element in navbar when corresponding section is in viewport
@@ -73,7 +74,7 @@ function setNavbarElActive(){
         else{
             navbarElementsList[index].classList.remove("active");       // remove class 'active' from element in navbar
         }})
-};
+}
 
 
 // Scroll to section using scrollIntoView event
@@ -83,7 +84,7 @@ function scrollToSection(){
             sections[i].scrollIntoView({behavior: "smooth"});
         });
     };
-};
+}
 
 
 // Hide navbar when scrolling down
@@ -91,15 +92,29 @@ function hideNavbar(){
     let startingScrollPos = window.pageYOffset;     // Assigns starting scroll position
     window.addEventListener('scroll',function(){
         let currentScrollPosition = window.pageYOffset;     // Assigns current scroll position
-        if(startingScrollPos > currentScrollPosition){      // If scrolling up
+        if(startingScrollPos > currentScrollPosition +10 ){      // If scrolling up  / "+10" adds a bit of deadzone
             pageHeader.style.top = "0";     // Keeps navbar visible
         }
-        else{
-            pageHeader.style.top = "-60px";     // Hides navbar
+        else if(startingScrollPos < currentScrollPosition - 10){     // If scrolling down  / "-10" adds a bit of deadzone
+            pageHeader.style.top = "-60px";       // Hides navbar
         }
         startingScrollPos =  currentScrollPosition;     // Updates startingScrollPos to the current scroll position
     })
-};
+}
+
+// Creates an element that scrolls the viewport to the top of the page when clicked
+function createScrollToTopEl(){
+    scrollToTop = document.createElement("li");     // This variable has global scope because it has NOT been declared
+    scrollToTop.innerText = ("^");
+    scrollToTop.id = "scrollToTop";
+    scrollToTop.className = "menu__link";
+    scrollToTop.addEventListener('click', function(){
+        window.scrollTo({       // Scroll to top of the page
+            top: 0,
+            behavior: "smooth"
+        });
+    })
+}
 
 
 /**
@@ -131,3 +146,15 @@ document.addEventListener('scroll', function(){
 
 // Hide navbar when scrolling down
 hideNavbar();
+
+
+// Add scroll to top link on navbar when under page fold
+createScrollToTopEl();
+document.addEventListener('scroll',function(){
+    if(window.pageYOffset > pageFold){      // If viewport is under pageFold
+        navbarList.appendChild(scrollToTop);        // add scrollToTop element to navbar
+    }
+    else{
+        scrollToTop.remove();
+    }
+});
