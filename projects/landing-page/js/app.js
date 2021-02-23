@@ -25,6 +25,8 @@ const section1 = document.getElementById("section1");
 const section2 = document.getElementById("section2");
 const section3 = document.getElementById("section3");
 const pageFold = window.pageYOffset + 800;
+const sectionTitles = document.querySelectorAll('h2');
+
 
 
 /**
@@ -67,7 +69,8 @@ function setAsActive(){
         navbarElementsList[index].addEventListener('click', function(){     // add EventListener to every element in navbar
             sections.forEach((element, index) =>{
                element.classList.remove("your-active-class");});        // remove class 'your-active-class' from every section
-            element.classList.add("your-active-class");})       // add class 'your-active-class' to corresponding section
+            if (!element.classList.contains("isCollapsed")){        // if section is not collapsed
+                element.classList.add("your-active-class");}})       // add class 'your-active-class' to corresponding section
         });
 }
 
@@ -110,6 +113,7 @@ function hideNavbar(){
     })
 }
 
+
 // Creates an element that scrolls the viewport to the top of the page when clicked
 function createScrollToTopEl(){
     scrollToTop = document.createElement("li");     // This variable has global scope because it has NOT been declared
@@ -122,6 +126,27 @@ function createScrollToTopEl(){
             behavior: "smooth"
         });
     })
+}
+
+
+// Collapses section when clicked and toggles 'your-active-class'
+function collapseSection(){
+    sections.forEach((section, index) =>{
+        sectionTitles[index].addEventListener('click', function(){
+            section.classList.toggle("isCollapsed")
+            this.nextElementSibling.classList.toggle("collapsed");
+            if (section.classList.contains("your-active-class")){
+                section.classList.remove("your-active-class");
+            }
+            else if (!section.classList.contains("your-active-class") && !section.classList.contains("isCollapsed")){
+                sections.forEach((section) => {
+                    section.classList.remove("your-active-class");
+                });
+            section.classList.add("your-active-class");}
+            this.nextElementSibling.nextElementSibling.classList.toggle("collapsed");
+            })
+        }
+    );
 }
 
 
@@ -161,3 +186,6 @@ createScrollToTopEl();
 document.addEventListener('scroll',function(){
     addScrollToTopElWhenBelowPageFold();
 });
+
+// Collapse sections when clicked
+collapseSection();
