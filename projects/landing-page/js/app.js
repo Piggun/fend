@@ -34,6 +34,14 @@ const pageFold = window.pageYOffset + 800;
 */
 
 
+function addScrollToTopElWhenBelowPageFold(){
+    if(window.pageYOffset > pageFold){      // If viewport is under pageFold
+        navbarList.appendChild(scrollToTop);        // add scrollToTop element to navbar
+    }
+    else{
+        scrollToTop.remove();
+    }
+}
 
 
 /**
@@ -151,10 +159,5 @@ hideNavbar();
 // Add scroll to top link on navbar when under page fold
 createScrollToTopEl();
 document.addEventListener('scroll',function(){
-    if(window.pageYOffset > pageFold){      // If viewport is under pageFold
-        navbarList.appendChild(scrollToTop);        // add scrollToTop element to navbar
-    }
-    else{
-        scrollToTop.remove();
-    }
+    addScrollToTopElWhenBelowPageFold();
 });
