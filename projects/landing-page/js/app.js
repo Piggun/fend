@@ -134,16 +134,16 @@ function collapseSection(){
     sections.forEach((section, index) =>{
         sectionTitles[index].addEventListener('click', function(){
             section.classList.toggle("isCollapsed")
-            this.nextElementSibling.classList.toggle("collapsed");
-            if (section.classList.contains("your-active-class")){
-                section.classList.remove("your-active-class");
+            this.nextElementSibling.classList.toggle("collapsed");      // collapse/open first paragraph when section's title is clicked
+            if (section.classList.contains("your-active-class")){       // if section is active
+                section.classList.remove("your-active-class");      // make it inactive
             }
-            else if (!section.classList.contains("your-active-class") && !section.classList.contains("isCollapsed")){
+            else if (!section.classList.contains("your-active-class") && !section.classList.contains("isCollapsed")){       // if section is NOT active and NOT collapsed
                 sections.forEach((section) => {
-                    section.classList.remove("your-active-class");
+                    section.classList.remove("your-active-class");      // make every section inactive
                 });
-            section.classList.add("your-active-class");}
-            this.nextElementSibling.nextElementSibling.classList.toggle("collapsed");
+            section.classList.add("your-active-class");}        // make section active
+            this.nextElementSibling.nextElementSibling.classList.toggle("collapsed");       // collapse/open first paragraph when section's title is clicked
             })
         }
     );
