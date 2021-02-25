@@ -1,13 +1,9 @@
 # Landing Page Project
 
-## Table of Contents
+This is my first project in which i had to use mostly Javascript to build a navigation bar.
 
-* [Instructions](#instructions)
+The navbar builds dinamically based on the content of the page, it disappears when scrolling down and reappears when scrolling up.
+The navbar will show which section is active based on the current viewport of the page and whenever an item on the navigation menu it's clicked, it will take you to the appropriate section and also make that section active/highlighted.
+When scrolling below the page fold a scroll to top button will appear inside the navbar.
+All the sections on the page are collapsible.
 
-## Instructions
-
-The starter project has some HTML and CSS styling to display a static version of the Landing Page project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
-
-To get started, open `js/app.js` and start building out the app's functionality
-
-For specific, detailed instructions, look at the project instructions in the Udacity Classroom.
