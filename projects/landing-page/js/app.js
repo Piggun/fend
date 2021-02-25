@@ -24,7 +24,7 @@ const sections = document.querySelectorAll('section');
 const section1 = document.getElementById('section1');
 const section2 = document.getElementById('section2');
 const section3 = document.getElementById('section3');
-const pageFold = document.body.scrollHeight / 3
+const pageFold = document.body.scrollHeight / 3;
 const sectionTitles = document.querySelectorAll('h2');
 
 
